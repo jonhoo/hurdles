@@ -19,5 +19,7 @@ license = "MIT/Apache-2.0"
 [badges]
 travis-ci = { repository = "jonhoo/hurdles" }
 
-
 [dependencies]
+
+[features]
+nightly = []
