@@ -4,9 +4,23 @@
 [![Documentation](https://docs.rs/hurdles/badge.svg)](https://docs.rs/hurdles/)
 [![Build Status](https://travis-ci.org/jonhoo/arccstr.svg?branch=master)](https://travis-ci.org/jonhoo/arccstr)
 
-A thread barrier like [`std::sync::Barrier`] with a more scalable implementation than the one
-provided by the standard library (which uses a `Mutex`). A barrier enables multiple threads to
-synchronize the beginning of some computation.
+A scalable barrier (like [`std::sync::Barrier`]) that enables multiple threads to synchronize
+the beginning of some computation.
+
+This crate provides a similar interface as [`std::sync::Barrier`], but behaves much better in
+the face of many concurrently waiting threads, and incurs a lower per-thread latency penalty
+(see benchmarks below). The interface does differ from the standard library barrier however:
+
+ - `Barrier` in this crate is `Clone`, and should *not* be wrapped in a `sync::Arc`.
+ - `Barrier::wait` in this crate takes a `&mut self` receiver as each thread must keep some
+   local state.
+
+Furthermore, when a thread blocks on `Barrier::wait`, the thread will (currently) *never* be
+suspended, and instead spin on the barrier. For the first few spins, it will also not call
+`sched_yield` to avoid the cost of thread sleep/wakeup. If threads are expected to reach the
+barrier at nearly the same time, or barrier latency is critical, this is probably what you
+want. However, if barriers are staggered and far between, then you may want to use
+[`std::sync::Barrier`] instead, as it is better about handling long waits.
 
 ## Examples
 
@@ -34,7 +48,11 @@ for handle in handles {
 
 ## Implementation
 
-This crate currently implements a counter-based linear barrier as described in "3.1 Centralized
+At the time of writing, the implementation of `std::sync::Barrier` internally uses a `Mutex`,
+which causes contention with many waiting threads, and incurs an undue performance overhead for
+each call to `wait`.
+
+This crate instead implements a counter-based linear barrier as described in "3.1 Centralized
 Barriers" in Mellor-Crummey and Scott’s paper [Algorithms for scalable synchronization on
 shared-memory multiprocessors][1] from 1991. For a higher-level explanation, see Lars-Dominik
 Braun's [Introduction to barrier algorithms][2].
