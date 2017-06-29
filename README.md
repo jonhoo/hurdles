@@ -44,23 +44,23 @@ Braun's [Introduction to barrier algorithms][2].
 Modern laptop with 2-core (4HT) Intel Core i7-5600U @ 2.60GHz:
 
 ```text
-test tests::ours_2 ... bench:         135 ns/iter (+/- 1)
-test tests::std_2  ... bench:         276 ns/iter (+/- 181)
-test tests::ours_4 ... bench:         235 ns/iter (+/- 14)
-test tests::std_4  ... bench:      11,882 ns/iter (+/- 111)
+test tests::ours_2 ... bench:         190 ns/iter (+/- 24)
+test tests::std_2  ... bench:       2,054 ns/iter (+/- 822)
+test tests::ours_4 ... bench:         236 ns/iter (+/- 2)
+test tests::std_4  ... bench:      11,913 ns/iter (+/- 60)
 ```
 
 Dell server with 2x 10-core (20HT) Intel Xeon E5-2660 v3 @ 2.60GHz across two NUMA nodes:
 
 ```text
-test tests::ours_4  ... bench:         568 ns/iter (+/- 4)
-test tests::std_4   ... bench:       4,568 ns/iter (+/- 88)
-test tests::ours_8  ... bench:       1,454 ns/iter (+/- 14)
-test tests::std_8   ... bench:      17,668 ns/iter (+/- 322)
-test tests::ours_16 ... bench:       2,856 ns/iter (+/- 32)
-test tests::std_16  ... bench:      38,254 ns/iter (+/- 597)
-test tests::ours_32 ... bench:       3,848 ns/iter (+/- 36)
-test tests::std_32  ... bench:      86,194 ns/iter (+/- 15,506)
+test tests::ours_4  ... bench:         689 ns/iter (+/- 9)
+test tests::std_4   ... bench:       4,762 ns/iter (+/- 151)
+test tests::ours_8  ... bench:       1,380 ns/iter (+/- 13)
+test tests::std_8   ... bench:      17,545 ns/iter (+/- 288)
+test tests::ours_16 ... bench:       2,970 ns/iter (+/- 33)
+test tests::std_16  ... bench:      38,215 ns/iter (+/- 469)
+test tests::ours_32 ... bench:       3,838 ns/iter (+/- 129)
+test tests::std_32  ... bench:      94,266 ns/iter (+/- 12,243)
 ```
 
 [1]: https://dl.acm.org/citation.cfm?doid=103727.103729
