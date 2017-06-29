@@ -66,3 +66,7 @@ test tests::std_32  ... bench:      86,194 ns/iter (+/- 15,506)
 [1]: https://dl.acm.org/citation.cfm?doid=103727.103729
 [2]: https://6xq.net/barrier-intro/
 [`std::sync::Barrier`]: https://doc.rust-lang.org/std/sync/struct.Barrier.html
+
+Or, in plot form:
+
+![Barrier time as the number of threads grow](perf.png)

@@ -5,3 +5,7 @@
 [![Build Status](https://travis-ci.org/jonhoo/arccstr.svg?branch=master)](https://travis-ci.org/jonhoo/arccstr)
 
 {{readme}}
+
+Or, in plot form:
+
+![Barrier time as the number of threads grow](perf.png)
